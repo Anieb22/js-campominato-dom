@@ -26,3 +26,7 @@ body{
     background-color: blueviolet;
     border: 1px dashed white;
 }
+
+.square.bomb-finded{
+    background-color: red;
+}
