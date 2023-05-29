@@ -25,7 +25,7 @@ play.addEventListener('click', function() {
   let cellNumber;
 
   output.innerHTML = '';
-
+  
   switch (difficulty) {
     case 1:
       cellNumber = 100;
@@ -54,6 +54,7 @@ play.addEventListener('click', function() {
 
   let squares = document.querySelectorAll('.square');
   let gameOver = false
+  let clicForWin = 0
 
   squares.forEach(function(square) {
     square.addEventListener('click', function() {
@@ -61,11 +62,14 @@ play.addEventListener('click', function() {
         if(gameOver === false){
             if(!arrayBomb.includes(parseInt(this.innerText))){
                 this.classList.add('active');
+                clicForWin++
+                
             }
     
             else{
                 this.classList.add('bomb-finded')
                 gameOver = true;
+                document.getElementById('punteggio').innerText = `Punteggio: ${clicForWin}`
             }    
         }
 
