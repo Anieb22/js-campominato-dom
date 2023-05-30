@@ -58,7 +58,7 @@ play.addEventListener('click', function() {
 
   squares.forEach(function(square) {
     square.addEventListener('click', function() {
-      if (!gameOver) {
+      if (!gameOver && !this.classList.contains('active')) {
         if (!arrayBomb.includes(parseInt(this.innerText))) {
           this.classList.add('active');
           clicForWin++;
