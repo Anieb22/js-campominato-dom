@@ -25,7 +25,7 @@ play.addEventListener('click', function() {
   let cellNumber;
 
   output.innerHTML = '';
-  
+
   switch (difficulty) {
     case 1:
       cellNumber = 100;
@@ -53,26 +53,33 @@ play.addEventListener('click', function() {
   }
 
   let squares = document.querySelectorAll('.square');
-  let gameOver = false
-  let clicForWin = 0
+  let gameOver = false;
+  let clicForWin = 0;
 
   squares.forEach(function(square) {
     square.addEventListener('click', function() {
+      if (!gameOver) {
+        if (!arrayBomb.includes(parseInt(this.innerText))) {
+          this.classList.add('active');
+          clicForWin++;
+          if (clicForWin === cellNumber - 16) {
+            gameOver = true;
+            document.getElementById('punteggio').innerText = `Punteggio: ${clicForWin}`;
+          }
+        } else {
+          this.classList.add('bomb-finded');
+          gameOver = true;
+          let bombs = document.querySelectorAll('.square');
 
-        if(gameOver === false){
-            if(!arrayBomb.includes(parseInt(this.innerText))){
-                this.classList.add('active');
-                clicForWin++
-                
+          bombs.forEach(function(bomb) {
+            if (arrayBomb.includes(parseInt(bomb.innerText))) {
+              bomb.classList.add('bomb-finded');
             }
-    
-            else{
-                this.classList.add('bomb-finded')
-                gameOver = true;
-                document.getElementById('punteggio').innerText = `Punteggio: ${clicForWin}`
-            }    
-        }
+          });
 
+          document.getElementById('punteggio').innerText = `Punteggio: ${clicForWin}`;
+        }
+      }
     });
   });
 });
